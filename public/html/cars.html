@@ -1,0 +1,36 @@
+<div class="page-data">
+    <div class="data-btn">
+        <a class="a-inside edit" href="#!add_car">Add new car</a>
+    </div>
+    <div class="data-table">
+        <table border="1" cellpadding="7" cellspacing="7">
+            <tr>
+                <th width="50px">Id</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Country registered</th>
+                <th>Plate number</th>
+                <th width="200px">Action</th>
+            </tr>
+            <tr ng-repeat="car in cars">
+                <td width="50px"> {{car.id}} </td>
+                <td>{{car.make}}</td>
+                <td>{{car.model}}</td>
+                <td>{{car.country_registered}}</td>
+                <td>{{car.plate_number}}</td>
+                
+                <td width="120px">
+                    <a class="a-inside edit" href="#!car_repairs/show/{{car.id}}">History</a>
+                    <!-- <a class="a-inside delete" href="#!delete_customer/delete/{{customer.id}}">Delete</a> -->
+
+                    <a href="" class="a-inside delete" ng-click="deleteCar(car.id);">Delete</a>
+
+
+                    
+
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

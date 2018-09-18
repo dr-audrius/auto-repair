@@ -1,0 +1,60 @@
+<div class="page-data">
+
+    <p cellpadding="11" class="label">Please enter car data:</p>
+
+    <form method="post" name="addForm">
+        <table>
+            <tr>
+                <td class="label">Make</td>
+                <td>:
+                    <input type="text" name="make" ng-pattern="/^[a-zA-Z\s]*$/" ng-model="car.make" minlength="3" maxlength="20" required>
+                </td>
+                <td>
+                    <div ng-messages="addForm.make.$error" ng-if="addForm.make.$dirty">
+                        <div ng-message="required">Please enter car make</div>
+                        <div ng-message="minlength">At least 3 symbols</div>
+                        <div ng-message="maxlength">Entry is too long</div>
+                        <div ng-message="pattern">Only letters, please</div>
+                        <div ng-message="usernameAvailable">The name entered has already been registered</div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Model</td>
+                <td>:
+                    <input type="text" name="model" ng-model="car.model" minlength="3" maxlength="20" required>
+                </td>
+                <td>
+                    <div ng-messages="addForm.model.$error" ng-if="addForm.model.$dirty">
+                        <div ng-message="required">Please enter car model</div>
+                        <div ng-message="minlength">At least 3 symbols</div>
+                        <div ng-message="maxlength">Entry is too long</div>
+                        <!-- <div ng-message="pattern">Only letters, please</div> -->
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Plate ID</td>
+                <td>:
+                    <input type="text" name="plateid" ng-pattern="/^[a-zA-Z]{3}[0-9]{3}$/" ng-model="car.plateid" ng-change="checkCar(car.plateid)" required>
+                </td>
+                <td>
+                    <div ng-messages="addForm.plateid.$error" ng-if="addForm.plateid.$dirty">
+                        <div ng-message="required">Please enter your plate ID</div>
+                        <div ng-message="pattern">Please use format as follows: ABC123</div>
+                    </div>
+                    <div ng-show="occupied">Plate ID occupied, choose another ID</div>
+                </td>   
+            </tr>
+            
+            <tr>
+                <td class="label"></td>
+                <td>
+                    &nbsp;
+                    <input type="submit" value="Save" ng-disabled="!car.make || addForm.make.$invalid || !car.model || addForm.model.$invalid || !car.plateid || addForm.plateid.$invalid || occupied"
+                        ng-click="addCar(car)">
+                    <input type="button" name="cancel" value="Cancel" class="cancel" ng-click="cancelAdd()">
+                </td>
+            </tr>
+        </table>
+    </form>
